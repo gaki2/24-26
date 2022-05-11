@@ -6,6 +6,7 @@ import "../image/spark.png";
 import * as Router from "./Route";
 import DashBoard from "./pages/dashboard/DashBoard";
 import NotFound from "./pages/notfound/NotFound";
+import SlideEffect from "./pages/slideEffect/slideEffect";
 
 const dashBoard = new DashBoard(document.body as HTMLBodyElement);
 const notFound = new NotFound(document.body as HTMLBodyElement);
@@ -22,3 +23,5 @@ const render = async (path: any) => {
 };
 
 render("/");
+// const slider = new SlideEffect(document.body);
+// slider.toRight();

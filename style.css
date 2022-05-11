@@ -108,10 +108,31 @@
   canvas {
     position: absolute;
     z-index:-1;
-    background-color: #333;
+    background-color:#2596be;
     width: 100%;
     height: 100%;
     /* cursor: pointer; */
   }
 
 
+/* slideEffect Css */
+
+.slider {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  left: -100vw;
+  top:0;
+  background-color: rgb(255, 255, 255);
+  
+}
+
+@keyframes slide {
+  from {
+    left: -100vw;
+  }  
+  to {
+    left: 0;
+  }
+}

@@ -1,10 +1,11 @@
 import { distance } from "../../utils";
 import Tube from "../../Characters/tube";
 
+const REDUCE = 0.002;
+
 export default class Ball {
   x: number;
   y: number;
-
   r: number;
   stageWidth: number;
   stageHeight: number;
@@ -20,7 +21,7 @@ export default class Ball {
     this.y = y;
     this.tube = new Tube({ x: this.x, y: this.y });
     this.tube.changeScale(0.2);
-    this.r = 10;
+    this.r = 21;
     this.vx = 3;
     this.vy = 3;
     this.$elems = null;
@@ -56,31 +57,6 @@ export default class Ball {
     this.setRectPos();
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  shakeRect(idx: number) {
-    const nowRect = this.$elems[idx];
-    console.log(nowRect);
-    // eslint-disable-next-line no-param-reassign
-    const a = [
-      { transform: "scale(1)" },
-      { transform: "scale(0.98)" },
-      { transform: "scale(1.0)" },
-      { transform: "scale(1.02)" },
-      { transform: "scale(1.0)" },
-      { transform: "scale(0.99)" },
-      { transform: "scale(1.0)" },
-      { transform: "scale(1.01)" },
-      { transform: "scale(1.0)" },
-      { transform: "scale(0.996)" },
-      { transform: "scale(1.0 )" },
-    ];
-    const b = {
-      duration: 800,
-      iterations: 1,
-    };
-    nowRect.animate(a, b);
-  }
-
   collide() {
     if (this.x - this.r <= 0) {
       this.vx *= -1;
@@ -100,28 +76,24 @@ export default class Ball {
       this.$rects.forEach((rect: any, idx: number) => {
         if (rect.top <= this.y && this.y <= rect.bottom && distance(this.x, this.y, rect.left, this.y) <= this.r) {
           this.vx *= -1;
-          // this.shakeRect(idx);
         } else if (
           rect.top <= this.y &&
           this.y <= rect.bottom &&
           distance(this.x, this.y, rect.right, this.y) <= this.r
         ) {
           this.vx *= -1;
-          // this.shakeRect(idx);
         } else if (
           rect.left <= this.x &&
           this.x <= rect.right &&
           distance(this.x, this.y, this.x, rect.top) <= this.r
         ) {
           this.vy *= -1;
-          // this.shakeRect(idx);
         } else if (
           rect.left <= this.x &&
           this.x <= rect.right &&
           distance(this.x, this.y, this.x, rect.bottom) <= this.r
         ) {
           this.vy *= -1;
-          // this.shakeRect(idx);
         }
       });
     }
@@ -129,18 +101,22 @@ export default class Ball {
 
   draw(ctx: CanvasRenderingContext2D) {
     this.setRectPos();
-    // this.x += this.vx;
-    // this.y += this.vy;
-    this.tube.center.x += this.vx;
-    this.tube.center.y += this.vy;
-    this.rotate += 1;
+    this.x += this.vx;
+    this.y += this.vy;
+    if (this.vx >= 0) this.vx -= (Math.abs(this.vx) - Math.abs(1)) * REDUCE;
+    else this.vx += (Math.abs(this.vx) - Math.abs(1)) * REDUCE;
+    if (this.vy >= 0) this.vy -= (Math.abs(this.vy) - Math.abs(1)) * REDUCE;
+    else this.vy += (Math.abs(this.vy) - Math.abs(1)) * REDUCE;
+    this.tube.center.x = this.x;
+    this.tube.center.y = this.y;
+    this.rotate += 1.5;
     this.tube.changeRoate(this.rotate);
     this.collide();
+    // ctx.globalCompositeOperation = "overlay";
     ctx.beginPath();
     // ctx.fillStyle = "#ff02f3";
     this.tube.draw(ctx);
     // ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
     ctx.fill();
-    ctx.closePath();
   }
 }
