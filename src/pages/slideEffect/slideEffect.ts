@@ -1,5 +1,5 @@
 export default class SlideEffect {
-  $div: any;
+  $div: HTMLElement;
   constructor($parent: HTMLElement) {
     this.$div = this.init($parent);
   }
@@ -11,14 +11,16 @@ export default class SlideEffect {
     return $div;
   }
 
+  animationEnd() {
+    this.$div.addEventListener("animationend", (e) => {
+      console.log(e.type);
+      console.log(e.elapsedTime);
+      console.log("애니메이션 끝");
+    });
+  }
+
   // eslint-disable-next-line class-methods-use-this
   toRight() {
-    console.log(1);
-    const translateToRight = [{ left: "-100vw" }, { left: "0vw" }];
-    const timing = {
-      duration: 1000,
-      fill: "forwards",
-    };
-    this.$div.animate(translateToRight, timing);
+    this.$div.classList.add("page-transition-left-animation");
   }
 }

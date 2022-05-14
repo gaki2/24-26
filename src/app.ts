@@ -25,3 +25,4 @@ const render = async (path: any) => {
 render("/");
 // const slider = new SlideEffect(document.body);
 // slider.toRight();
+// slider.animationEnd();

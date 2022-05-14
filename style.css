@@ -24,8 +24,16 @@
     list-style-type: none;
   }
 
-  
+/* Componet */
+.warning-p-tag {
+  color: red;
 
+}
+
+
+
+  
+/* DashBoard */
   .wrapper {
     display: flex;
     justify-content: center;
@@ -125,7 +133,13 @@
   left: -100vw;
   top:0;
   background-color: rgb(255, 255, 255);
-  
+}
+
+.page-transition-left-animation {
+  animation-name: slide;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
 }
 
 @keyframes slide {
