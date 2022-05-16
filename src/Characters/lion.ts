@@ -1,6 +1,6 @@
 import Character from "./character";
 import * as Type from "../type/characterType";
-import * as Drawing from "../coordinate/lion";
+import * as Drawing from "../character_coord/lion";
 
 export default class Lion extends Character {
   name: Type.Name;

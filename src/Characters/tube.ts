@@ -1,6 +1,6 @@
 import Character from "./character";
 import * as Type from "../type/characterType";
-import * as Drawing from "../coordinate/tube";
+import * as Drawing from "../character_coord/tube";
 
 export default class Tube extends Character {
   name: Type.Name;

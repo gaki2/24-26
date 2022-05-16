@@ -1,31 +1,37 @@
-import Canvas from "./canvas";
+// import Canvas from "../canvas";
+import CanvasBackground from "../canvas";
+import createImageAnchors from "../components/ImageAnchors";
 
 export default class DashBoard {
   $parent: HTMLBodyElement;
-  canvas: Canvas | null;
+  // canvas: Canvas | null;
 
   constructor($parent: HTMLBodyElement) {
     this.$parent = $parent;
-    this.canvas = null;
+    // this.canvas = null;
   }
 
   // eslint-disable-next-line class-methods-use-this
   render() {
-    this.$parent.innerHTML = this.getHtml();
-    this.canvas = new Canvas();
-    this.canvas.init();
-    this.canvas.draw();
+    const imageAnchors = createImageAnchors();
+    this.$parent.appendChild(imageAnchors);
+    const canvas = new CanvasBackground();
+    canvas.attachTo(this.$parent);
+    // this.$parent.innerHTML = this.getHtml();
+    // this.canvas = new Canvas();
+    // this.canvas.init();
+    // this.canvas.draw();
   }
 
-  remove() {
-    while (this.$parent.firstChild) {
-      this.$parent.removeChild(this.$parent.firstChild);
-    }
-    if (this.canvas) {
-      this.canvas.delete();
-      this.canvas = null;
-    }
-  }
+  // remove() {
+  //   while (this.$parent.firstChild) {
+  //     this.$parent.removeChild(this.$parent.firstChild);
+  //   }
+  //   if (this.canvas) {
+  //     this.canvas.delete();
+  //     this.canvas = null;
+  //   }
+  // }
 
   // eslint-disable-next-line class-methods-use-this
   getHtml() {
@@ -42,6 +48,7 @@ export default class DashBoard {
               </div>
             </div>
           </li>
+       
           <li class="art-item">
             <div class="item item_yellow">
               <img src="./pixelize.png">

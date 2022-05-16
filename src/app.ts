@@ -4,7 +4,7 @@ import "../image/fallingLion.png";
 import "../image/pixelize.png";
 import "../image/spark.png";
 import * as Router from "./Route";
-import DashBoard from "./pages/dashboard/DashBoard";
+import DashBoard from "./pages/dashboard/page/DashBoard";
 import NotFound from "./pages/notfound/NotFound";
 import SlideEffect from "./pages/slideEffect/slideEffect";
 
@@ -21,8 +21,8 @@ const render = async (path: any) => {
     console.log(err);
   }
 };
-
 render("/");
+
 // const slider = new SlideEffect(document.body);
 // slider.toRight();
 // slider.animationEnd();

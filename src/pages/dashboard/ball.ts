@@ -1,121 +1,80 @@
+import Vector from "./vector";
 import { distance } from "../../utils";
 import Tube from "../../Characters/tube";
 
 const REDUCE = 0.002;
 
 export default class Ball {
-  x: number;
-  y: number;
   r: number;
-  stageWidth: number;
-  stageHeight: number;
-  vx: number;
-  vy: number;
-  $elems: any;
-  $rects: any[];
-  tube: Tube;
   rotate: number;
+  pos: { x: number; y: number };
+  ball: Tube;
+  v: Vector;
 
   constructor(x: number, y: number) {
-    this.x = x;
-    this.y = y;
-    this.tube = new Tube({ x: this.x, y: this.y });
-    this.tube.changeScale(0.2);
-    this.r = 21;
-    this.vx = 3;
-    this.vy = 3;
-    this.$elems = null;
-    this.$rects = [];
+    this.pos = { x, y };
+    this.ball = new Tube(this.pos);
+    this.ball.changeScale(0.2);
+    this.r = 16 + 5 * Math.random();
+    this.v = new Vector(3, 3);
     this.rotate = 0;
   }
 
-  setRectPos() {
-    if (this.$rects.length === 0) {
-      this.$elems.forEach((elem: HTMLElement) => {
-        // eslint-disable-next-line no-param-reassign
-        elem.onload = () => {
-          setTimeout(() => {
-            const rect = elem.getBoundingClientRect();
-            this.$rects.push(rect);
-          }, 60);
-        };
-      });
-    } else {
-      this.$rects = [];
-      this.$elems.forEach((elem: HTMLElement) => {
-        // eslint-disable-next-line no-param-reassign
-        const rect = elem.getBoundingClientRect();
-        this.$rects.push(rect);
-      });
-    }
+  getX() {
+    return this.pos.x;
   }
 
-  resize(stageWidth: number, stageHeight: number) {
-    this.stageWidth = stageWidth;
-    this.stageHeight = stageHeight;
-    this.$elems = Array.prototype.slice.call(document.getElementsByTagName("img"));
-    this.setRectPos();
+  setX(x: number) {
+    this.pos.x = x;
   }
 
-  collide() {
-    if (this.x - this.r <= 0) {
-      this.vx *= -1;
-      this.x = this.r;
-    } else if (this.x + this.r >= this.stageWidth) {
-      this.vx *= -1;
-      this.x = this.stageWidth - this.r;
-    } else if (this.y + this.r >= this.stageHeight) {
-      this.vy *= -1;
-      this.y = this.stageHeight - this.r;
-    } else if (this.y - this.r <= 0) {
-      this.vy *= -1;
-      this.y = this.r;
-    }
+  getY() {
+    return this.pos.y;
+  }
 
-    if (this.$rects.length > 0) {
-      this.$rects.forEach((rect: any, idx: number) => {
-        if (rect.top <= this.y && this.y <= rect.bottom && distance(this.x, this.y, rect.left, this.y) <= this.r) {
-          this.vx *= -1;
-        } else if (
-          rect.top <= this.y &&
-          this.y <= rect.bottom &&
-          distance(this.x, this.y, rect.right, this.y) <= this.r
-        ) {
-          this.vx *= -1;
-        } else if (
-          rect.left <= this.x &&
-          this.x <= rect.right &&
-          distance(this.x, this.y, this.x, rect.top) <= this.r
-        ) {
-          this.vy *= -1;
-        } else if (
-          rect.left <= this.x &&
-          this.x <= rect.right &&
-          distance(this.x, this.y, this.x, rect.bottom) <= this.r
-        ) {
-          this.vy *= -1;
-        }
-      });
-    }
+  setY(y: number) {
+    this.pos.y = y;
+  }
+
+  getR() {
+    return this.r;
+  }
+
+  getV() {
+    return this.v;
+  }
+
+  setV(v: Vector) {
+    this.v = v;
+  }
+
+  // equals to vx *= -1
+  reverseVx() {
+    const reversedVx = this.getV().multiplyX(-1);
+    this.setV(reversedVx);
+  }
+
+  // equals to vy *= -1
+  reverseVy() {
+    const reversedVy = this.getV().multiplyY(-1);
+    this.setV(reversedVy);
   }
 
   draw(ctx: CanvasRenderingContext2D) {
-    this.setRectPos();
-    this.x += this.vx;
-    this.y += this.vy;
-    if (this.vx >= 0) this.vx -= (Math.abs(this.vx) - Math.abs(1)) * REDUCE;
-    else this.vx += (Math.abs(this.vx) - Math.abs(1)) * REDUCE;
-    if (this.vy >= 0) this.vy -= (Math.abs(this.vy) - Math.abs(1)) * REDUCE;
-    else this.vy += (Math.abs(this.vy) - Math.abs(1)) * REDUCE;
-    this.tube.center.x = this.x;
-    this.tube.center.y = this.y;
+    this.pos.x += this.v.x;
+    this.pos.y += this.v.y;
+    if (this.v.x >= 0) this.v.x -= (Math.abs(this.v.x) - Math.abs(1)) * REDUCE;
+    else this.v.x += (Math.abs(this.v.x) - Math.abs(1)) * REDUCE;
+    if (this.v.y >= 0) this.v.y -= (Math.abs(this.v.y) - Math.abs(1)) * REDUCE;
+    else this.v.y += (Math.abs(this.v.y) - Math.abs(1)) * REDUCE;
+    this.ball.center.x = this.pos.x;
+    this.ball.center.y = this.pos.y;
     this.rotate += 1.5;
-    this.tube.changeRoate(this.rotate);
-    this.collide();
+    this.ball.changeRoate(this.rotate);
     // ctx.globalCompositeOperation = "overlay";
     ctx.beginPath();
     // ctx.fillStyle = "#ff02f3";
-    this.tube.draw(ctx);
+    this.ball.draw(ctx);
     // ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
     ctx.fill();
   }

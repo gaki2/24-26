@@ -1,6 +1,6 @@
 import Character from "./character";
 import * as Type from "../type/characterType";
-import * as Drawing from "../coordinate/apeach";
+import * as Drawing from "../character_coord/apeach";
 
 export default class Apeach extends Character {
   name: Type.Name;

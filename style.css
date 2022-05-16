@@ -34,6 +34,11 @@
 
   
 /* DashBoard */
+.image-anchor-fragment-div-style {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
   .wrapper {
     display: flex;
     justify-content: center;
@@ -109,7 +114,7 @@
   }
 
   .item_content h2 {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   
