@@ -1,6 +1,6 @@
-import { PI, PI2 } from "../util/constant";
+import { PI, PI2 } from "../../util/constant";
 import { COLOR } from "../color/color";
-import { roundRect } from "../util/canvas";
+import { roundRect } from "../../util/canvas";
 
 export function drawArms(ctx: CanvasRenderingContext2D) {
   ctx.fillStyle = COLOR.BROWN;

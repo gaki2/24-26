@@ -1,5 +1,5 @@
 import { COLOR } from "../color/color";
-import { PI2 } from "../util/constant";
+import { PI2 } from "../../util/constant";
 
 export function drawHead(ctx: CanvasRenderingContext2D) {
   ctx.beginPath();

@@ -1,5 +1,10 @@
 export const PI2 = Math.PI * 2;
 
+// 배열의 사이즈를 인자로 받아, 배열의 idx 를 랜덤하게 리턴하는 함수
+export function randomIdx(size: number) {
+  return Math.floor(Math.random() * size);
+}
+
 export function distance(x1: number, y1: number, x2: number, y2: number) {
   const diffX = x2 - x1;
   const diffY = y2 - y1;

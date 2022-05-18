@@ -1,17 +1,15 @@
 export default class NotFound {
   $parent: HTMLBodyElement;
 
-  constructor($parent: HTMLBodyElement) {
-    this.$parent = $parent;
+  attachTo($parent: HTMLElement) {
+    // eslint-disable-next-line no-param-reassign
+    $parent.innerHTML = this.getHtml();
   }
 
-  render() {
-    this.$parent.innerHTML = this.getHtml();
-  }
-
-  remove() {
-    while (this.$parent.firstChild) {
-      this.$parent.removeChild(this.$parent.firstChild);
+  // eslint-disable-next-line class-methods-use-this
+  remove($parent: HTMLElement) {
+    while ($parent.firstChild) {
+      $parent.removeChild($parent.firstChild);
     }
   }
 

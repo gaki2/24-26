@@ -5,7 +5,6 @@ type State = Record<string, unknown>;
 // 1. setState 를 호출한 다음에 다시 attach 를 호출해야 state 의 변경사항이 엘리먼트에 적용됨
 // 2. 컴포넌트 인스턴스를 만들때 htmlString 은 인자로 필수로 넣어줘야하고, initalState 는 항상 객체 형태여야 하며 없을수도 있다.
 // 3. innerHtml 은 템플릿 리터럴로 선언하면되고, ${this.stateName} 같이 변수값을 넣어주면된다.
-
 export default class CustomComponent {
   htmlString: string;
   fragment: HTMLDivElement;
@@ -36,6 +35,10 @@ export default class CustomComponent {
     parentNode.appendChild(this.fragment);
   }
 
+  removeFrom(parentNode: HTMLElement) {
+    parentNode.removeChild(this.fragment);
+  }
+
   static createElement(elemType: keyof HTMLElementTagNameMap, classList?: string[] | string, innerText?: string) {
     const elem = document.createElement(elemType);
     if (typeof classList === "string") {
@@ -51,5 +54,9 @@ export default class CustomComponent {
 
   static attach(parentNode: HTMLElement, childNode: HTMLElement) {
     parentNode.appendChild(childNode);
+  }
+
+  static detach(parentNode: HTMLElement, childNode: HTMLElement) {
+    parentNode.removeChild(childNode);
   }
 }

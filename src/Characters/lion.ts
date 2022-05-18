@@ -1,12 +1,12 @@
 import Character from "./character";
-import * as Type from "../type/characterType";
-import * as Drawing from "../character_coord/lion";
+import * as Type from "./type/characterType";
+import * as Drawing from "./character_coord/lion";
 
 export default class Lion extends Character {
   name: Type.Name;
   expression: Type.Expression;
 
-  constructor(center: Type.Center) {
+  constructor(center?: Type.Center) {
     super(center);
     this.name = "lion";
     this.expression = "normal";

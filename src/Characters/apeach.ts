@@ -1,11 +1,11 @@
 import Character from "./character";
-import * as Type from "../type/characterType";
-import * as Drawing from "../character_coord/apeach";
+import * as Type from "./type/characterType";
+import * as Drawing from "./character_coord/apeach";
 
 export default class Apeach extends Character {
   name: Type.Name;
 
-  constructor(center: Type.Center) {
+  constructor(center?: Type.Center) {
     super(center);
     this.name = "apeach";
   }

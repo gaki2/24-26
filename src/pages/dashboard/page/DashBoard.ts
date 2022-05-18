@@ -1,75 +1,31 @@
 // import Canvas from "../canvas";
-import CanvasBackground from "../canvas";
+import CanvasBackground from "../components/CanvasBackground";
 import createImageAnchors from "../components/ImageAnchors";
+import CustomComponent from "../../../customComponent/CustomComponent";
 
 export default class DashBoard {
   $parent: HTMLBodyElement;
-  // canvas: Canvas | null;
-
-  constructor($parent: HTMLBodyElement) {
-    this.$parent = $parent;
-    // this.canvas = null;
+  canvas: CanvasBackground;
+  imageAnchors: HTMLElement;
+  constructor() {
+    this.canvas = new CanvasBackground();
+    this.imageAnchors = createImageAnchors();
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  render() {
-    const imageAnchors = createImageAnchors();
-    this.$parent.appendChild(imageAnchors);
-    const canvas = new CanvasBackground();
-    canvas.attachTo(this.$parent);
-    // this.$parent.innerHTML = this.getHtml();
-    // this.canvas = new Canvas();
-    // this.canvas.init();
-    // this.canvas.draw();
+  attachTo($parent: HTMLElement) {
+    // 먼저 캔버스를 랜더링 한 뒤 이미지 앵커를 랜더링해야 캔버스가 화면에 보여짐.
+
+    this.canvas.createBall();
+    this.canvas.attachTo($parent);
+    this.canvas.display();
+    $parent.appendChild(this.imageAnchors);
   }
 
-  // remove() {
-  //   while (this.$parent.firstChild) {
-  //     this.$parent.removeChild(this.$parent.firstChild);
-  //   }
-  //   if (this.canvas) {
-  //     this.canvas.delete();
-  //     this.canvas = null;
-  //   }
-  // }
-
-  // eslint-disable-next-line class-methods-use-this
-  getHtml() {
-    return `
-      <canvas id="canvas"></canvas>
-      <div class="wrapper">
-        <ul class="arts">
-          <li class="art-item">
-            <div class="item item_blue">
-              <img src="./fallingLion.png">
-              <div class="item_content">
-                <h2>추락하는 라이언</h2>
-                <p>추락하는 라이언 프로젝트</p>
-              </div>
-            </div>
-          </li>
-       
-          <li class="art-item">
-            <div class="item item_yellow">
-              <img src="./pixelize.png">
-              <div class="item_content">
-                <h2>케릭터의 분해</h2>
-                <p>모자이크로 분해되는 케릭터</p>
-              </div>
-            </div>
-          </li>
-          <li class="art-item">
-            <div class="item item_white">
-              <img src="./spark.png">
-              <div class="item_content">
-                <h2>스파크 버즈</h2>
-                <p>스파크버즈 프로젝트</p>
-              </div>
-            </div>
-          </li>
-        </ul>
-        </section>
-      </div>
-      `;
+  removeFrom($parent: HTMLElement) {
+    if (this.canvas) {
+      this.canvas.removeEvent();
+    }
+    this.canvas.detachFrom($parent);
+    CustomComponent.detach($parent, this.imageAnchors);
   }
 }
