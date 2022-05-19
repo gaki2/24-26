@@ -9,7 +9,7 @@ import DashBoard from "./pages/dashboard/page/DashBoard";
 import NotFound from "./pages/notfound/NotFound";
 import PixelizeCharacter from "./pages/pixelize/PixelizeCharacter";
 import SlideEffect from "./pages/slideEffect/slideEffect";
-const commitTest = "1";
+const commitTest = "2";
 const dashBoard = new DashBoard();
 const notFound = new NotFound();
 const pixelize = new PixelizeCharacter();
