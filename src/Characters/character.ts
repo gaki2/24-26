@@ -15,6 +15,21 @@ export default class Character {
     this.rotate = 0;
   }
 
+  getPos() {
+    return this.center;
+  }
+
+  setX(newX: number) {
+    this.center.x = newX;
+  }
+
+  setY(newY: number) {
+    if (Number.isNaN(newY)) {
+      console.log("newY is NaN (in character class setY method)");
+    }
+    this.center.y = newY;
+  }
+
   resize(center: Type.Center) {
     this.center = center;
   }
@@ -37,7 +52,16 @@ export default class Character {
     this.scale = scale;
   }
 
-  changeRoate(degree: Type.Degree) {
+  // getter
+  getScale() {
+    return this.scale;
+  }
+
+  setRotate(degree: Type.Degree) {
     this.rotate = degree;
+  }
+
+  getRotate() {
+    return this.rotate;
   }
 }

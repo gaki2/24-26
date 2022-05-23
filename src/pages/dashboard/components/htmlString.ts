@@ -1,6 +1,6 @@
 export const imageAnchorFallingLionHtml = `
 <li class="art-item">
-      <div class="item item_blue">
+      <div class="item item_fallingLion">
         <img src="./fallingLion.png">
         <div class="item_content">
           <h2>추락하는 라이언</h2>
@@ -11,7 +11,7 @@ export const imageAnchorFallingLionHtml = `
 `;
 export const imageAnchorPixelizeHtml = `
 <li class="art-item">
-<div class="item item_yellow">
+<div class="item item_pixelize">
   <img src="./pixelize.png">
   <div class="item_content">
     <h2>케릭터의 분해</h2>
@@ -23,7 +23,7 @@ export const imageAnchorPixelizeHtml = `
 
 export const imageAnchorSparkHtml = `
 <li class="art-item">
-<div class="item item_white">
+<div class="item item_spark">
   <img src="./spark.png">
   <div class="item_content">
     <h2>스파크 버즈</h2>

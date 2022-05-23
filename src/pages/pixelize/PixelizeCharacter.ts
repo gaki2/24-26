@@ -24,6 +24,7 @@ export default class PixelizeCharacter {
   backGroundColor: string;
   clickHandler: (e: MouseEvent) => void;
   characterIdx: number;
+  rippleOn: boolean;
 
   constructor() {
     this.canvas = document.createElement("canvas");
@@ -32,7 +33,10 @@ export default class PixelizeCharacter {
     [this.characters, this.nowCharacter, this.backGroundColor, this.characterIdx] = this.initCharacters();
     // Ripple 을 생성함
     this.ripple = new Ripple(this.stageWidth, this.stageHeight);
-    this.rippleStart = false;
+    this.rippleOn = false;
+  }
+
+  init() {
     this.resize();
     this.resizeHandler = this.resize.bind(this);
     this.clickHandler = this.onClick.bind(this);
@@ -44,23 +48,23 @@ export default class PixelizeCharacter {
     const clickedElem = (e.target as Element).className;
     switch (clickedElem) {
       case "pixelize_image":
-        if (this.rippleStart) {
+        if (this.rippleOn) {
           this.ripple.reverse();
         } else {
           this.ripple.reset();
           this.ripple.pixelize();
         }
-        this.rippleStart = true;
+        this.rippleOn = true;
         break;
       case "zoom_in_image":
         this.nowCharacter.increaseScale(1);
-        this.rippleStart = false;
+        this.rippleOn = false;
         this.ripple.reset();
         this.ripple.pixelize();
         break;
       case "zoom_out_image":
         this.nowCharacter.decreaseScale(1);
-        this.rippleStart = false;
+        this.rippleOn = false;
         this.ripple.reset();
         this.ripple.pixelize();
         break;
@@ -69,7 +73,7 @@ export default class PixelizeCharacter {
         this.characterIdx %= this.characters.length;
         this.nowCharacter = this.characters[this.characterIdx];
         this.backGroundColor = BackgroundColor[randomIdx(BackgroundColor.length)];
-        this.rippleStart = false;
+        this.rippleOn = false;
         break;
 
       default:
@@ -113,18 +117,22 @@ export default class PixelizeCharacter {
   }
 
   attachTo(parentNode: HTMLElement) {
+    this.init();
     // 사이트 메뉴버튼 엘리먼트 랜더링
+    this.ripple.reset();
+    this.rippleOn = false;
     SideButton.attachTo(document.body);
     // 캔버스 랜더링
     this.display();
+    // 이전에 Ripple 한 기록이 있다면 초기화
     parentNode.appendChild(this.canvas);
   }
 
-  detachFrom(parentNode: HTMLElement) {
+  removeFrom(parentNode: HTMLElement) {
+    this.removeEvent();
     parentNode.removeChild(this.canvas);
+    SideButton.removeFrom(parentNode);
   }
-
-  changeCharacter() {}
 
   display() {
     this.requestId = window.requestAnimationFrame(this.display.bind(this));
@@ -133,7 +141,7 @@ export default class PixelizeCharacter {
     this.ctx?.fillRect(0, 0, this.stageWidth, this.stageHeight);
 
     this.nowCharacter.draw(this.ctx!);
-    if (this.rippleStart) {
+    if (this.rippleOn) {
       this.ripple.animate(this.ctx!);
     }
   }

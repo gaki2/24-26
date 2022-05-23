@@ -197,26 +197,31 @@
 
 .slider {
   position: absolute;
-  width: 100vw;
+  z-index: 100;
+  width: 200vw;
   height: 100vh;
   overflow: hidden;
-  left: -100vw;
+  left: -200vw;
   top:0;
   background-color: rgb(255, 255, 255);
 }
 
 .page-transition-left-animation {
   animation-name: slide;
-  animation-duration: 500ms;
+  animation-duration: 2000ms;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
 }
 
+.hide {
+  z-index: -100 !important; 
+}
+
 @keyframes slide {
   from {
-    left: -100vw;
+    left: -200vw;
   }  
   to {
-    left: 0;
+    left: 0vw;
   }
 }

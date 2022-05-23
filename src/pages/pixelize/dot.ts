@@ -5,7 +5,7 @@ type COLORTYPE = {
   g: number;
   b: number;
 };
-const Acc = 0.15;
+const Acc = 0.3;
 export default class Dot {
   x: number;
   y: number;

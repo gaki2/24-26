@@ -17,6 +17,7 @@ export default class Lion extends Character {
     ctx.lineWidth = 3;
     ctx.translate(this.center.x, this.center.y);
     ctx.scale(this.scale, this.scale);
+    ctx.rotate((this.rotate * Math.PI) / 180);
     Drawing.drawArms(ctx);
     Drawing.drawLegs(ctx);
     Drawing.drawBody(ctx);

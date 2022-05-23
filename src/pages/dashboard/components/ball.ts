@@ -86,7 +86,7 @@ export default class Ball {
 
     // 공(튜브)가 움직이면서 회전하는 효과를 주기 위해 rotate 를 추가함
     this.rotate += 1.5;
-    this.ball.changeRoate(this.rotate);
+    this.ball.setRotate(this.rotate);
 
     // (튜브) 드로우
     this.ball.draw(ctx);

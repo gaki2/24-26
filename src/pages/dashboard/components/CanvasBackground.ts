@@ -26,14 +26,18 @@ export default class CanvasBackground {
     this.colorIdx = -1;
     this.canvas = document.createElement("canvas");
     this.ctx = this.canvas.getContext("2d");
-    this.resizeHandler = this.resize.bind(this);
-    this.onMoveHandler = this.onMove.bind(this);
-    this.onClickHandler = this.onClick.bind(this);
     this.ripple = new Ripple();
     this.rippleStart = false;
     this.balls = [];
     this.DOMRectPos = [];
+  }
+
+  init() {
     this.resize();
+    this.resizeHandler = this.resize.bind(this);
+    this.onMoveHandler = this.onMove.bind(this);
+    this.onClickHandler = this.onClick.bind(this);
+    window.addEventListener("load", this.getImageAnchorPos.bind(this), false);
     window.addEventListener("resize", this.resizeHandler, false);
     window.addEventListener("mousemove", this.onMoveHandler, false);
     window.addEventListener("click", this.onClickHandler, false);
@@ -44,8 +48,11 @@ export default class CanvasBackground {
     this.stageHeight = window.innerHeight;
     this.canvas.width = this.stageWidth;
     this.canvas.height = this.stageHeight;
-    this.getImageAnchorPos();
     this.ripple.resize(this.stageWidth, this.stageHeight);
+  }
+
+  getBallNums() {
+    return this.balls.length;
   }
 
   // ball 을 생성하는 함수
@@ -104,16 +111,12 @@ export default class CanvasBackground {
   // 이미지 링크박스들의 DomRect 위치정보를 가져온다.
   // this.DOMRectPos 에 위치 정보값을 Push 하는 함수
   getImageAnchorPos() {
-    this.$elems = Array.prototype.slice.call(document.getElementsByTagName("img"));
+    this.$elems = Array.prototype.slice.call(document.getElementsByClassName("art-item"));
     if (this.DOMRectPos.length === 0) {
       this.$elems.forEach((elem: HTMLElement) => {
         // eslint-disable-next-line no-param-reassign
-        elem.onload = () => {
-          setTimeout(() => {
-            const rect = elem.getBoundingClientRect();
-            this.DOMRectPos.push(rect);
-          }, 60);
-        };
+        const rect = elem.getBoundingClientRect();
+        this.DOMRectPos.push(rect);
       });
     } else {
       this.DOMRectPos = [];

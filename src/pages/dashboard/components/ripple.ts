@@ -37,7 +37,6 @@ export default class Ripple {
 
   draw(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, color: string) {
     if (this.radius > this.maxD) {
-      console.log("finish");
       this.finish = true;
       this.radius = 0;
       // eslint-disable-next-line no-param-reassign

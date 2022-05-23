@@ -35,14 +35,6 @@ export const collide = (x1: number, x2: number) => {
   return false;
 };
 
-// 원 모양의 ripple 일때 충돌
-// export const collide = (x1: number, y1: number, x2: number, y2: number, r: number) => {
-//   if (distance(x1, y1, x2, y2) <= r) {
-//     return true;
-//   }
-//   return false;
-// };
-
 export const isMobile = () =>
   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
