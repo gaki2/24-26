@@ -39,7 +39,7 @@ export default class DashBoard {
     // 먼저 캔버스를 랜더링 한 뒤 이미지 앵커를 랜더링해야 캔버스가 화면에 보여짐.
     this.canvas.init();
     if (this.canvas.getBallNums() === 0) {
-      this.canvas.createBall();
+      setTimeout(() => this.canvas.createBall(), 3000);
     }
     this.canvas.attachTo($parent);
     this.canvas.display();
@@ -50,6 +50,7 @@ export default class DashBoard {
     if (this.canvas) {
       this.canvas.removeEvent();
     }
+    this.canvas.removeAllBalls();
     this.canvas.detachFrom($parent);
     CustomComponent.detach($parent, this.imageAnchors);
     window.removeEventListener("click", this.routingHandler, false);

@@ -20,7 +20,7 @@ export default class Ripple {
     this.stageWidth = stageWidth;
     this.stageHeight = stageHeight;
     this.dots = [];
-    this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
+    this.pixelRatio = window.devicePixelRatio > 1 ? 1 : 1;
     this.acc = 1.04;
   }
 

@@ -31,9 +31,13 @@
 }
 
 
+/* 
+-------------------------------------------------
+                    DashBoard CSS
+-------------------------------------------------
+*/
 
-  
-/* DashBoard */
+
 .image-anchor-fragment-div-style {
   display: flex;
   align-items: center;
@@ -59,7 +63,7 @@
   }
 
   .art-item:hover {
-    flex-basis: 13rem;
+    flex-basis: 11.5rem;
     margin: 0 1.5rem;
     cursor: pointer;
   }
@@ -118,16 +122,20 @@
   }
 
   
-  canvas {
+  .canvas-background {
     position: absolute;
     z-index:-1;
     background-color:#7BFEC9;
     width: 100%;
     height: 100%;
-    /* cursor: pointer; */
+   
   }
 
-/* Pixelize - SideButton Css */
+/* 
+-------------------------------------------------
+                    Pixelize CSS
+-------------------------------------------------
+*/
 .side_btn_wrapper {
   position: absolute;
   top: 5rem;
@@ -191,37 +199,75 @@
   cursor: pointer;
  }
 
+ 
+/* 
+-------------------------------------------------
+                    Spark CSS
+-------------------------------------------------
+*/
 
-
-/* slideEffect Css */
-
-.slider {
-  position: absolute;
-  z-index: 100;
-  width: 200vw;
-  height: 100vh;
-  overflow: hidden;
-  left: -200vw;
-  top:0;
-  background-color: rgb(255, 255, 255);
+.overflow-hidden-style {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #222;
+  overflow-y: hidden;
 }
 
-.page-transition-left-animation {
-  animation-name: slide;
-  animation-duration: 2000ms;
-  animation-timing-function: ease-in;
-  animation-fill-mode: forwards;
+.original-canvas {
+  display: block;
+  width: 100%;
+  height: 60vh;
+  
 }
 
-.hide {
-  z-index: -100 !important; 
+.reflect-canvas {
+  display: block;
+  width: 100%;
+  height: 60vh;
+  transform-origin: 0% 50%;
+  transform: scaleY(-1);
+  filter: blur(10px);
 }
 
-@keyframes slide {
-  from {
-    left: -200vw;
-  }  
-  to {
-    left: 0vw;
+
+/* 
+-------------------------------------------------
+                    Page Transition Effect 
+-------------------------------------------------
+*/
+
+.squeeze-animation {
+  animation: animate 2.3s ease;
+}
+
+body {
+  background-color: #222;
+}
+
+
+@keyframes animate {
+  10% {
+    transform: scale(1, 0.001);
   }
+    
+  35% {
+    transform: scale(0.2, 0.001);
+    opacity: 0;
+  }
+    
+  50% {
+    transform: scale(0.2, 0.001);
+    opacity: 0;
+  }
+    
+  77% {
+    transform: scale(1, 0.001);
+    opacity: 1;
+  }
+    
+  100% {
+    transform: scale(1, 1);
+  }
+    
 }

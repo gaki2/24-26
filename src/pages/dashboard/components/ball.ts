@@ -15,9 +15,13 @@ export default class Ball {
     this.pos = { x, y };
     this.ball = new Tube(this.pos);
     this.ball.changeScale(0.2);
-    this.r = 16 + 5 * Math.random();
+    this.r = 18;
     this.v = new Vector(3, 3);
     this.rotate = 0;
+  }
+
+  setR(r: number) {
+    this.r = r;
   }
 
   getX() {
@@ -37,7 +41,8 @@ export default class Ball {
   }
 
   getR() {
-    return this.r;
+    // domrect 에 충돌할때 여유값으로 3px 을 줌으로써, ball 이 rect 에 끼는 현상을 방지
+    return this.r + 3;
   }
 
   getV() {

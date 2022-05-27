@@ -24,6 +24,7 @@ export default class FallingLionApp {
   onDownHandler: (e: MouseEvent) => void;
   onUpHandler: (e: MouseEvent) => void;
   onMoveHandler: (e: MouseEvent) => void;
+  scale: number;
 
   constructor() {
     this.canvas = document.createElement("canvas");
@@ -37,6 +38,7 @@ export default class FallingLionApp {
     this.moveToZero = 0;
     this.diff = 0;
     this.lions = [];
+    this.scale = 0.6;
     this.resize();
     this.createLions();
   }
@@ -59,6 +61,8 @@ export default class FallingLionApp {
     this.stageHeight = document.body.clientHeight;
     this.canvas.width = this.stageWidth;
     this.canvas.height = this.stageHeight;
+    this.scale = 0.3 + this.stageWidth * 0.00019;
+    console.log(this.scale);
   }
 
   onDown(e: MouseEvent) {
@@ -99,7 +103,6 @@ export default class FallingLionApp {
   }
 
   removeEvent() {
-    console.log("removeEvent working");
     window.removeEventListener("resize", this.resizeHandler, false);
     window.removeEventListener("mousedown", this.onDownHandler, false);
     window.removeEventListener("mousemove", this.onMoveHandler, false);
@@ -113,7 +116,7 @@ export default class FallingLionApp {
   }
 
   createLion() {
-    const randomScale = normalDistribution(0.55, 0.1); // 평균 scale: 0.55, 표준편차 0.1
+    const randomScale = normalDistribution(this.scale, 0.1); // 평균 scale: 0.55, 표준편차 0.1
     const randomX = -400 + Math.random() * (this.stageWidth + 800) * (1 / randomScale);
     const randomY = (-1600 + Math.random() * 1600) * (1 / randomScale);
     const lion = new Lion({ x: randomX, y: randomY });

@@ -5,6 +5,17 @@ export function randomIdx(size: number) {
   return Math.floor(Math.random() * size);
 }
 
+export function randomInt(start: number, finish: number) {
+  if (start > finish) {
+    return -1;
+  }
+  return start + Math.random() * (finish - start);
+}
+
+export function getValue<Type, Key extends keyof Type>(obj: Type, key: Key) {
+  return obj[key];
+}
+
 export function distance(x1: number, y1: number, x2: number, y2: number) {
   const diffX = x2 - x1;
   const diffY = y2 - y1;

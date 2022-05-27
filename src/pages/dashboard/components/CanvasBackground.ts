@@ -25,6 +25,7 @@ export default class CanvasBackground {
     this.backgroundColors = ["#CE7082", "#f0cf61", "#167c80", "#32b67a", "#2596be"];
     this.colorIdx = -1;
     this.canvas = document.createElement("canvas");
+    this.canvas.classList.add("canvas-background");
     this.ctx = this.canvas.getContext("2d");
     this.ripple = new Ripple();
     this.rippleStart = false;
@@ -49,6 +50,21 @@ export default class CanvasBackground {
     this.canvas.width = this.stageWidth;
     this.canvas.height = this.stageHeight;
     this.ripple.resize(this.stageWidth, this.stageHeight);
+    this.ballResize();
+  }
+
+  ballResize() {
+    if (this.balls.length > 0) {
+      const ballScale = 0.1 + this.stageWidth * 0.00005;
+      this.balls.forEach((ball: Ball) => {
+        ball.ball.changeScale(ballScale);
+        ball.setR(90 * ballScale + 2);
+      });
+    }
+  }
+
+  removeAllBalls() {
+    this.balls = [];
   }
 
   getBallNums() {
@@ -59,6 +75,7 @@ export default class CanvasBackground {
   createBall() {
     const ball = new Ball(15 * Math.random(), 10 * Math.random());
     this.balls.push(ball);
+    this.ballResize();
   }
 
   // ball 이 화면의 DomRect 와 충돌하면, ball 의 진행방향을 바꿔주는 함수

@@ -25,10 +25,13 @@ export default class PixelizeCharacter {
   clickHandler: (e: MouseEvent) => void;
   characterIdx: number;
   rippleOn: boolean;
+  pixelRatio: number;
 
   constructor() {
     this.canvas = document.createElement("canvas");
+    this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
     this.ctx = this.canvas.getContext("2d");
+    this.ctx!.scale(this.pixelRatio, this.pixelRatio);
     // 캐릭터 객체들을 생성함
     [this.characters, this.nowCharacter, this.backGroundColor, this.characterIdx] = this.initCharacters();
     // Ripple 을 생성함
@@ -121,7 +124,7 @@ export default class PixelizeCharacter {
     // 사이트 메뉴버튼 엘리먼트 랜더링
     this.ripple.reset();
     this.rippleOn = false;
-    SideButton.attachTo(document.body);
+    SideButton.attachTo(parentNode);
     // 캔버스 랜더링
     this.display();
     // 이전에 Ripple 한 기록이 있다면 초기화
