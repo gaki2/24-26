@@ -1,5 +1,6 @@
 import Lion from "../../Characters/lion";
 import { normalDistribution, lengthToRadian } from "../../utils";
+import Message from "./Message";
 
 const GRAVITY = 2.5;
 
@@ -25,10 +26,13 @@ export default class FallingLionApp {
   onUpHandler: (e: MouseEvent) => void;
   onMoveHandler: (e: MouseEvent) => void;
   scale: number;
+  message: any;
 
   constructor() {
     this.canvas = document.createElement("canvas");
     this.canvas.style.backgroundColor = "#2596be";
+    this.canvas.style.cursor = "pointer";
+    this.message = Message;
     this.ctx = this.canvas.getContext("2d");
     this.lionNums = 75;
     this.maxRotate = 30;
@@ -100,6 +104,7 @@ export default class FallingLionApp {
   attachTo($parent: HTMLElement) {
     this.init();
     $parent.appendChild(this.canvas);
+    this.message.attachTo($parent);
   }
 
   removeEvent() {
@@ -113,6 +118,7 @@ export default class FallingLionApp {
   removeFrom($parent: HTMLElement) {
     this.removeEvent();
     $parent.removeChild(this.canvas);
+    this.message.removeFrom($parent);
   }
 
   createLion() {

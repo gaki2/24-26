@@ -9,7 +9,7 @@ export default class DashBoard {
   imageAnchors: HTMLElement;
   routingHandler: (e: MouseEvent) => void;
   imageAnchorsWrapper: any[];
-  routeEvent: any;
+  routeEvent: () => void;
 
   constructor(routeEvent: any) {
     this.canvas = new CanvasBackground();

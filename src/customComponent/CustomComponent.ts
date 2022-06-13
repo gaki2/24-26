@@ -9,6 +9,8 @@ export default class CustomComponent {
   htmlString: string;
   fragment: HTMLDivElement;
   state: State;
+  event: any;
+  eventType: string;
 
   constructor(htmlString: string, initalState: State = {}, fragmentClassName: string | null = null) {
     this.state = initalState;
@@ -37,6 +39,16 @@ export default class CustomComponent {
 
   removeFrom(parentNode: HTMLElement) {
     parentNode.removeChild(this.fragment);
+  }
+
+  addEvent(eventType: string, event: any) {
+    this.eventType = eventType;
+    this.event = event;
+    this.fragment.addEventListener(this.eventType, this.event);
+  }
+
+  removeEvent() {
+    this.fragment.removeEventListener(this.eventType, this.event);
   }
 
   static createElement(elemType: keyof HTMLElementTagNameMap, classList?: string[] | string, innerText?: string) {

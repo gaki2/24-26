@@ -131,6 +131,55 @@
    
   }
 
+
+/* 
+-------------------------------------------------
+                    Falling Lion CSS
+-------------------------------------------------
+*/
+
+.message-container {
+  position: absolute;
+  width: 20vw;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  transition: all 1.0s;
+  background-color: transparent;
+  animation: message_alert 8s ;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.message-p {
+  margin-top: auto;
+  margin-bottom: auto;
+  text-align: center;
+  font-size: 1rem;
+  font-family: sans-serif;
+  color: #fff;
+  white-space : nowrap;
+}
+
+@keyframes message_alert {
+  60% {
+    transform: translate(-50% , -50%) scale(1);
+  }
+
+  70% {
+    transform: translate(-50% , -50%) scale(1.05);
+  }
+
+  80% {
+    transform: translate(-50% , -50%) scale(0.95);
+  }
+  
+  100% {
+    transform: translate(-50% , -50%) scale(0);
+  }
+}
+ 
+
 /* 
 -------------------------------------------------
                     Pixelize CSS
@@ -210,7 +259,7 @@
   width: 100%;
   height: 100%;
   position: relative;
-  background-color: #222;
+  background-color: rgba(65, 119, 246, 0.905);
   overflow-y: hidden;
 }
 
@@ -230,6 +279,46 @@
   filter: blur(10px);
 }
 
+/* 
+-------------------------------------------------
+                    Buttons
+-------------------------------------------------
+*/
+
+.close-button {
+  position: absolute;
+  top:50%;
+  left:0.5rem;
+  transform: translate(0, -50%);
+  margin-top: auto; 
+  margin-bottom: auto;
+  z-index: 3;
+  cursor: pointer;
+}
+
+.close-button svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: #222;
+}
+
+.github-button {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+  margin-top: auto; 
+  margin-bottom: auto;
+  z-index: 3;
+  cursor: pointer;
+}
+
+.github-button svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: #222;
+}
+
 
 /* 
 -------------------------------------------------
@@ -238,7 +327,7 @@
 */
 
 .squeeze-animation {
-  animation: animate 2.3s ease;
+  animation: animate 1.2s ease;
 }
 
 body {
@@ -271,3 +360,4 @@ body {
   }
     
 }
+
