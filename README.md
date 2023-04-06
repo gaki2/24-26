@@ -1,5 +1,3 @@
-# 24:26 Project
-
 ## 메인페이지
 #### 귀여운 오리가 통통 튀기고, 오리를 클릭하면 배경화면의 색이 바뀌어요.
 ![메인페이지](https://user-images.githubusercontent.com/76833478/230383986-6f8aca53-c125-4afa-a178-95acefd92224.gif)
